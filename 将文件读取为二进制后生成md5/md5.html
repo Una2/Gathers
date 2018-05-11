@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='./md5.js'></script>
+</head>
+
+<body>
+    <input type="file" id='fileId'>
+    <div id='shower'></div>
+    <script>
+
+        function readAsBinaryString(fn) {
+            var file = document.getElementById("fileId").files[0];
+            var reader = new FileReader();
+            console.log(file.size)
+            //将文件以二进制形式读入页面  
+            reader.readAsBinaryString(file);
+            reader.onload = function (f) {
+                //显示文件  
+                fn(this.result)
+            }
+        }
+        document.getElementById('fileId').onchange = function () {
+            readAsBinaryString(function(res){
+                console.log('change', hex_md5(res));
+            })
+        }
+    </script>
+</body>
+
+</html>
